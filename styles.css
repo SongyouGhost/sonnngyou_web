@@ -1,0 +1,416 @@
+/* Reset 基本樣式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  :root {
+    --mouseX: 0;
+    --mouseY: 0;
+    --BGcolor: rgb(255, 255, 255, 1);
+    --Maincolor: #060608;
+    --SUPcolor: rgba(250, 250, 250, 0);
+  }
+
+  body {
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
+    background-color: var(--BGcolor);
+    color: var(--Maincolor);
+    line-height: 1;
+    margin: 0;
+    transition: all 400ms ease;
+    cursor: none;
+  }
+
+  .mouse {
+    position: fixed;
+    left: var(--mouseX);
+    top: var(--mouseY);
+    width: 3px;
+    height: 3px;
+    border-radius: 100%;
+    background-color: var(--Maincolor);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border: 1px double var(--BGcolor);
+    z-index: 1000;
+    transition: all 10ms ease-out, background-color 10ms linear;
+}
+
+.ghost {
+  position: fixed;
+  opacity: 0.9;
+    left: var(--mouseX);
+    top: var(--mouseY);
+    transition: all 500ms ease-out, background-color 10ms linear; 
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    overflow: visible;
+    width: 2rem;
+    height: auto;
+}
+
+.ghost svg {
+  fill: var(--Maincolor);
+  stroke: var(--BGcolor);
+  stroke-width: 0px;
+  stroke-linecap: round;
+  width: 2rem;
+  height: auto;
+}
+
+
+::selection {
+  background: var(--Maincolor);
+  color: var(--BGcolor);
+  }
+  ::-moz-selection {
+    background: var(--Maincolor);
+    color: var(--BGcolor);
+  }
+  img::selection {
+  background: transparent;
+  }
+  img::-moz-selection {
+  background: transparent;
+  }
+
+  /* NAVBAR 共用樣式 */
+.navbar {
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--Maincolor);
+    color: var(--BGcolor);
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    left: 20px;
+    z-index: 500;
+    border-radius: 1rem;
+    padding: 0 1rem;
+    font-size: 1em;
+    line-height: 1.2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 400ms ease;
+  }
+
+  .navbarbackground {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--BGcolor);
+    display: none;
+    pointer-events: none;
+    z-index: -10;
+  }
+  
+  .navbar a {
+    position: static;
+    display: block;
+    color: var(--BGcolor);
+    justify-self: center;
+    line-height: 2;
+    height: 100%;
+    margin: 0 5%;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .menu {
+    display: flex;
+    justify-content: center;
+    width: 60%;
+  }
+  
+  .navbar a:hover {
+    text-decoration: underline;
+  }
+  
+  .navbar .icon {
+    position: absolute;
+    display: none;
+  }
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  padding: 3px 5px;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background-color 100ms, color 200ms;
+}
+
+input[type="radio"]:checked + label {
+  background-color: var(--BGcolor);
+  color: var(--Maincolor);
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  padding: 2em 0px;
+}
+
+.footer svg {
+  fill: var(--Maincolor);
+  opacity: 0.7;
+  width: 2em;
+  height: auto;
+  margin: 10px
+}
+
+.footer svg:hover {
+  opacity: 1;
+}
+
+.social-icons {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  left: 0px;
+  width: 20%;
+  min-width: 10rem;
+}
+
+.social-icons a{
+  width: 20%;
+  margin: 0 10% 0 0;
+}
+
+.social-icons svg{
+  position: relative;
+  height: 100%;
+  width: 1rem;
+  fill: var(--BGcolor);
+}
+.social-icons svg:hover{
+  fill: white;
+}
+
+.startbutton {
+  font-size: 1rem;
+  width: 20%;
+}
+
+.start {    
+  background-color: var(--Maincolor);
+  color: var(--BGcolor);
+  display: flex;
+  justify-content: left;
+  text-align: left;
+  position: fixed;
+  margin: 10px;
+  flex-direction: column;
+  width: 30dvw;
+  padding: 15px 15px;
+  border-radius: 15px;
+  display: none;
+  gap: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 100ms ease-in-out;
+}
+
+.start:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.start:hover .start{ display: flex;}
+.startbutton:hover .start{ display: flex; }
+
+.startbutton svg{
+  position: relative;
+  height: 100%;
+  width: 2rem;
+  fill: var(--Maincolor);
+}
+
+.start h1 {
+    font-size: 1em;
+}
+
+.start h2 {
+  font-size: 0.8em;
+  line-height: 1.8;
+  font-weight: 400;
+  margin-top: 10px;
+}
+
+.radio-container {
+  display: flex;
+  flex-direction: row;
+  font-size: 0.8em;
+  width: 50%;
+  font-weight: 600;
+}
+  
+  /* 電腦樣式 */
+  @media (min-width: 769px) {
+    .navbar a {
+      float: left;
+    }
+  }
+  
+  /* 手機樣式 */
+  @media (max-width: 768px) {
+    body {
+      cursor: auto;
+    }
+    .navbar {
+        transition: all 100ms ease-in-out;
+        height: 50px;
+        margin: 10px 15px;
+        right: 5px;
+    left: 5px;
+        
+    }
+
+    .responsive .navbarbackground {
+      display: block;
+      opacity: 0.5;
+      display: block;
+      z-index: -500;
+    }
+    .navbar a {
+      float: none;
+      display: none;
+    }
+    .navbar a.icon {
+        background-color: transparent;
+        position: absolute;
+        width: auto;
+        height: auto;
+        top: 0;
+        bottom: 0;
+        right: 15px;
+        font-size: 1em;
+        display: flex;
+        padding: 10px;
+      text-align: center;
+      align-items: center;
+      justify-self: center;
+    }
+    .navbar.responsive {
+        position: fixed;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+      flex-wrap: wrap;
+      top: 0px;
+      right: 0;
+      left: 0;
+      margin: 0px;
+        height: 100%;
+        border: none;
+        border-radius: 0px;
+        background-color: transparent;
+        background-color: calc();
+    }
+
+    .navbar.responsive .icon {
+      position: absolute;
+      align-items: center;
+      justify-content: center;
+      display: block;
+      padding: 10px;
+      width: 100px;
+      height: 100px;
+      right: 0;
+      top: 0;
+    }
+
+    .navbar a.icon:hover {text-decoration: none;}
+    .navbar.responsive .icon:hover {text-decoration: none;}
+    .navbar.responsive a {
+      float: none;
+      display: block;
+      width: 50%;
+      text-align: center;
+      align-items: center;
+      justify-self: center;
+      line-height: 1.8;
+      font-size: 2em;
+      opacity: 1;
+    }
+
+    .radio-container {
+      position: absolute;
+      background-color: transparent;
+      width: auto;
+      display: flex;
+      top: 0px;
+      bottom: 0px;
+      left: 20px;
+      display: flex;
+      justify-content: center;
+      text-align: left;
+      align-items: start;
+      margin-top: 0px;
+      font-size: 0.5rem;
+      font-weight: 600;
+      margin: 0px 0px;
+  }
+  .navbar.responsive .radio-container {
+    display: none;
+  }
+
+  .mouse {
+    display: none;
+  }
+  .ghost {
+    display: none;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+
+  .social-icons {
+    margin: 10vh auto;
+  }
+  }
+
+    /* 模糊效果樣式 */
+  .blur {
+      filter: blur(6px);
+  }
+
+  /* 滾動條的整體樣式 */
+::-webkit-scrollbar {
+  width: 0.8vw;  /* 設置滾動條的寬度 */
+  display: none;
+}
+
+/* 滾動條軌道 */
+::-webkit-scrollbar-track {
+  background: var(--BGcolor);  /* 設置軌道的背景色 */
+  border-radius: 5px;  /* 設置軌道的圓角 */
+  transition: all 0.5s ease;
+}
+
+/* 滾動條滑塊 */
+::-webkit-scrollbar-thumb {
+  background: var(--Maincolor);  /* 設置滑塊的背景色 */
+  border-radius: 5px;  /* 設置滑塊的圓角 */
+  border: 2px solid #ffffff;  /* 設置滑塊的邊框，與軌道背景色相同 */
+  transition: all 0.5s ease;
+}
+
+/* 滾動條滑塊在懸停時的樣式 */
+::-webkit-scrollbar-thumb:hover {
+  background: #777777;  /* 設置滑塊在懸停時的背景色 */
+}
+
+/* 滾動條滑塊在活動時的樣式 */
+::-webkit-scrollbar-thumb:active {
+  background: #777777;  /* 設置滑塊在活動時的背景色 */
+}
+

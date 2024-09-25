@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<head>
+    <html lang="zh-TW">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>幽字體合集</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --filter-normal: blur(0px) invert(95%);
+            --filter-hover: blur(5px) invert(100%);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--BGcolor);
+            font-family: 'Source Code Pro', 'Noto Sans TC', sans-serif;
+            cursor: auto;
+        }
+        #fontListContent {
+            display: flex;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+        .font-item {
+            position: relative;
+            transition: all 100ms ease-in-out;
+            min-height: 150px;
+            width: auto;
+            height: calc(98.5dvw * 0.2);
+            opacity: 0.1;
+            transition: opacity 800ms ease-in;
+        }
+        .font-item.visible { opacity: 1;}
+        
+        .font-item img {
+            width: auto;
+            height: 100%;
+            display: block;
+            filter: var(--filter-normal);
+            transition: all 300ms ease;
+        }
+        .font-item:hover img{ filter: var(--filter-hover);}
+        .font-item:hover .font-info {
+            display: flex; border: 3px solid var(--Maincolor); opacity: 1;
+            font-variation-settings: "wght" 600;
+        }
+        .font-info {
+            position: absolute;
+            padding: 10px;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            font-size: 0.8rem;
+            font-variation-settings: "wght" 100;
+            border: 0px solid var(--Maincolor);
+            color: var(--Maincolor);
+            opacity: 0;
+            flex-direction: column;
+            flex-wrap: wrap;
+            transition: all 400ms ease-in-out, border 400ms ease, font-variation-settings 500ms ease-in-out;
+            word-wrap: break-word;
+        }
+        .font-info .story {
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            left: 0px;
+            right: 0px;
+            height: 50%;
+        }
+        .font-info .font-layoutL {
+            position: absolute;
+            padding: 10px;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            text-align: start;
+        }
+        .font-info .font-layoutR {
+            position: absolute;
+            padding: 10px;
+            bottom: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            text-align: end;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar"></div>
+    <div id="fontListContent"></div>
+</body>
+    <script>
+        async function loadFonts() {
+            try {
+                const response = await fetch('font_designs.json'); // 替換為你的 JSON 文件路徑
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error loading fonts:', error);
+                return null;
+            }
+        }
+
+        
+        
+        function renderList(fonts) {
+            const listContent = document.getElementById('fontListContent');
+            listContent.innerHTML = '';
+            fonts.forEach(font => {
+                const fontItem = document.createElement('div');
+                fontItem.className = 'font-item';
+                fontItem.innerHTML = `
+                    <img src="./type/${font.image}" alt="./type/${font.image}">
+                    <div class="font-info">
+                        <div class="story">${font.story}</div>
+                        <div class="font-layoutL">
+                            <div class="theme">${font.theme}</div>
+                            <div class="year">${font.year.replace('-', '.')}</div>
+                        </div>
+                        <div class="font-layoutR">
+                            <div>${font.type}</div>
+                            <div class="purpose">${font.purpose}</div>
+                        </div>
+                    </div>     
+                `;
+                listContent.appendChild(fontItem);
+            });
+        
+            // 使用 IntersectionObserver 來觸發漸入效果
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // 觸發一次後停止觀察
+            }
+        });
+    }, {
+        threshold: 0.2 // 元素進入視窗20%時觸發
+    });
+
+    document.querySelectorAll('.font-item').forEach(item => {
+        observer.observe(item);
+    });
+}
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            const fonts = await loadFonts();
+            if (fonts) {
+                renderList(fonts);
+            }
+        });        
+    </script>
+    <script src="navbar.js"></script>
+        
+                
+</html>

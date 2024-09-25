@@ -1,0 +1,83 @@
+[
+  {
+    "h1": "成長的過程數位封面",
+    "h2": "數位封面",
+    "h2b": "商業案件",
+    "ptype3": "Vision",
+    "pdate1": "2022.6",
+    "imageSrc": "img/web_AndrewShenyoung.jpg",
+    "file": "work_AndrewShenyoung.html"
+  },
+  {
+    "h1": "作品名",
+    "h2": "創作類型",
+    "h2b": "客戶類型",
+    "ptype3": "Vision",
+    "pdate1": "2022.6",
+    "imageSrc": "img/web_AndrewShenyoung.jpg",
+    "file": "work_公版.html"
+  },
+  {
+    "h1": "深夜做稿俱樂部",
+    "h2": "衣服商品",
+    "h2b": "個人創作",
+    "ptype3": "Vision",
+    "pdate1": "2022.6",
+    "imageSrc": "img/web_NightCludTshirt.jpg",
+    "file": "work_NightCludTshirt.html"
+  },
+  {
+    "h1": "電波 RadioType",
+    "h2": "標準字設計",
+    "h2b": "個人創作",
+    "ptype3": "Vision",
+    "pdate1": "2024.6",
+    "imageSrc": "img/web_RadioType.jpg",
+    "file": "work_RedioType.html"
+  },
+  {
+    "h1": "幽之漠:做字展",
+    "h2": "數位遊戲",
+    "h2b": "個人創作",
+    "ptype3": "Vision",
+    "pdate1": "2024.8",
+    "imageSrc": "img/web_yuerg.jpg",
+    "file": "work_yuerg.html"
+  },
+  {
+    "h1": ">nutviGO",
+    "h2": "品牌識別",
+    "h2b": "個人創作",
+    "ptype3": "Brand",
+    "pdate1": "2024.8",
+    "imageSrc": "img/web_nutivigo.jpg",
+    "file": "work_nutviGO.html"
+  },
+  {
+    "h1": "扭曲的王冠海報",
+    "h2": "視覺藝術",
+    "h2b": "個人創作",
+    "ptype3": "Vision",
+    "pdate1": "2024.6",
+    "imageSrc": "img/TwistedCrown_4.png",
+    "file": "work_TwistedCrown.html"
+  },
+  {
+    "h1": "漂幽部 PiaoyouBook",
+    "h2": "品牌",
+    "h2b": "個人創作",
+    "ptype3": "Brand",
+    "pdate1": "2024.5",
+    "imageSrc": "img/web_PiaoyouBook.jpg",
+    "file": "work_PiaoyouBook.html"
+  },
+  {
+    "h1": "像素狗狗",
+    "h2": "繪畫",
+    "h2b": "商業接案",
+    "ptype3": "Vision",
+    "pdate1": "2020.6",
+    "imageSrc": "img/web_PixelDog.jpg",
+    "file": "work_PixelDog.html"
+  }
+]

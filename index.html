@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="這是幽作品集首頁">
+  <meta name="keywords" content="設計, 品牌, 作字">
+  <meta name="author" content="松佑">
+  <meta name="robots" content="index, follow">
+  <title>幽(松佑)作品集</title>
+  <link rel="icon" type="image/png" href="ghostlogo.png">
+</head>
+<link rel="stylesheet" href="styles.css">
+<!-- 引入 Inter 字體 -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<!-- 引入 思源黑體 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap">
+<script src="router.js"></script>
+<style>
+  body {
+    text-align: center;
+  }
+    #works-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4rem 2rem;
+        max-width: 100dvw;
+        margin: 10vh 0;
+        margin-bottom: 5vh;
+        padding: 20px;
+        cursor: none;
+    }
+
+    .awork {
+      position: relative;
+        color: var(--Maincolor);
+        width: calc(50dvw - 40px);
+        height: 60dvh;
+        max-height: 1080px;
+        display: block;
+        cursor: pointer;
+        transform: translateY(1rem);
+        opacity: 0;
+        transition: all 200ms ease;
+    }
+
+    .awork.visible {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+
+    .workinfo {
+      position: absolute;
+      bottom: 0px;
+      width: 100%;
+      padding: 1rem;
+      flex-direction: row;
+      text-align: justify;
+      display: flex;
+      opacity: 0;
+      z-index: 5;
+      transition: all 150ms ease-in-out;
+  }
+    .awork:hover .workinfo {
+      opacity: 1;
+    }
+
+    .awork h1 {
+        font-size: 0.6em;
+        font-weight: 900;
+        line-height: 1;
+        background-color: var(--BGcolor);
+        border-radius: 1rem;
+        padding: 0.5rem 0.8rem;
+    }
+
+    .awork h2 {
+        position: relative;
+        font-size: 0.6em;
+        font-weight: 100;
+        line-height: 1;
+        background-color: var(--BGcolor);
+        border-radius: 1rem;
+        padding: 0.5rem 0.8rem;
+    }
+    
+    .awork .BGimg {
+        width: 100%;
+        height: 100%;
+        text-align: right;
+        overflow: hidden;
+        transition: all 500ms ease-in-out;
+    }
+
+    .awork img{
+      object-position:center center;
+        max-width: 100%;
+        width: auto;
+        height: 100%;
+        object-fit: cover;
+        filter: blur(0px);
+        transition: all 100ms ease;
+    }
+    .awork:hover img {
+      filter: blur(3px);
+    }
+
+    .blur {
+        filter: blur(6px);
+    }
+
+    @media (max-width: 769px) {
+        #works-container {
+            position: relative;
+            top: auto;
+            width: 100%;
+            padding: 10px 20px;
+            right: auto;
+            margin: 40vh 0; /* 修改這裡，增加上下邊距 */
+        }
+
+        .start {
+            position: fixed;
+            display: flex;
+            justify-content: start;
+            background-color: var(--BGcolor);
+            border-radius: 15px;
+            top: auto;
+            bottom: 2em;
+            height: auto;
+            left: 20px;
+            right: 20px;
+            flex-direction: column;
+            width: auto;
+            padding: 15px 15px;
+            z-index: 10;
+            margin: auto;
+            border: 1px solid var(--Maincolor);
+            text-align: start;
+            text-align: left;
+        }
+
+        .start h1 {
+          font-size: 0.7em;
+          font-weight: 800;
+        }
+
+        .start h2 {
+          font-size: 0.5em;
+          font-weight: 300;
+        }
+
+        .awork {
+            flex-basis: 100%;
+            width: 90dvw;
+        }
+    }
+</style>
+<body onload="addContent()">
+    <div class="navbar"></div>
+    <div class="container">
+  <div id="works-container"></div>
+  <div style="height: 10vh;"></div>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', async function() {
+    const response = await fetch('result.json');
+    const works = await response.json();
+    const worksContainer = document.getElementById('works-container');
+
+    works.forEach(work => {
+      const workDiv = document.createElement('div');
+      workDiv.className = 'awork';
+      workDiv.innerHTML = `
+        <div class="workinfo">
+          <h1 class="work-title">${work.h1}</h1>
+          <h2 class="type">${work.h2}</h2>
+          <h2 class="type">${work.h2b}</h2>
+        </div>
+        <div class="BGimg"><img src="${work.imageSrc}" alt="${work.h1}"></div>
+      `;
+      workDiv.addEventListener('click', () => {
+        window.location.href = `./${work.file}`;
+      });
+      worksContainer.appendChild(workDiv);
+    });
+
+    // 在創建元素後立即設置觀察器
+    setupIntersectionObserver();
+  });
+
+  // 圖片漸入
+  function handleIntersection(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }
+
+  function setupIntersectionObserver() {
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px' // 提前觸發交叉
+    });
+
+    document.querySelectorAll('.awork').forEach(el => {
+      observer.observe(el);
+    });
+  }
+</script>
+  <script src="navbar.js"></script>
+</body>
+</html>
